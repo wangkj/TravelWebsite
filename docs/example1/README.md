@@ -1,7 +1,7 @@
 
 ## MVP、MVVM两种设计模式区别
 
-### MVP设计模式
+### 一、MVP设计模式
 
 Presenter(控制层)：可以理解为业务逻辑相关的控制层。
 
@@ -45,15 +45,15 @@ var page = new Page()
 page.init()
 ```
 
-当视图发生改变，如点击提交，控制器代码会执行。控制器负责所有的业务逻辑，或发生AJAX请求(与Model层交互)，或直接操作DOM。通过操作DOM，可以改变视图层。
+当视图发生改变，如点击提交，控制器代码会执行。控制器负责所有的业务逻辑，或发送AJAX请求(与Model层交互)，或直接操作DOM。通过操作DOM，可以改变视图层。
 
 在MVP设计模式里，最核心的层是Presenter层，Model层其实非常边缘。大量的代码都写在Presenter，这里面绝大部分代码都是在进行DOM操作。在使用jQuery开发大型项目时，其中百分之七八十代码都在进行DOM操作。
 
-### MVVM设计模式
+### 二、MVVM设计模式
 
-![]()
+![](https://raw.githubusercontent.com/Bian2017/TravelWebsite/master/docs/img/mvvm.jpg)
 
-如图所示，Model负责存储数据，View负责显示数据，还有个ViewModel层，是Vue内置的。编码的重点一部分在视图层，一部分在模型层。
+如图所示，Model负责存储数据，View负责展示数据，而ViewModel层是Vue内置的。在MVVM设计模式下，编码的重点一部分在视图层，一部分在模型层。
 
 **Model层**
 
