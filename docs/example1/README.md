@@ -1,9 +1,11 @@
 
+## MVP、MVVM两种设计模式区别
+
 ### MVP设计模式
 
 Presenter(控制层)：可以理解为业务逻辑相关的控制层。
 
-![]()
+![](https://raw.githubusercontent.com/Bian2017/TravelWebsite/master/docs/img/MVP.png)
 
 现使用jQuery展示简单的MVP层，其中Model层非常弱，因为并没有通过AJAX获取数据。
 
