@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hello world</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="inputValue" />
+    <button v-on:click="handleSubmit">提交</button>
+    <ul>
+      <!-- <li v-for="item in list">{{item}}</li> -->
+      <todo-item v-bind:content="item" v-for="item in list">
+      </todo-item>
+    </ul>
+  </div>
+  <script>
+
+    // 创建全局组件的方法
+    // Vue.component("TodoItem", {
+    //   props: ['content'],
+    //   template: `<li>{{content}}</li>`
+    // })
+
+    // 创建局部组件
+    var TodoItem = {
+      props: ['content'],
+      template: "<li>{{content}}</li>"
+    }
+    
+    var app = new Vue({
+      el: '#app',
+      components: {
+        TodoItem: TodoItem
+      },
+      data: {
+        list: [],
+        inputValue: ''
+      },
+      methods: {
+        handleSubmit: function () {
+          this.list.push(this.inputValue)
+          this.inputValue = ''
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
