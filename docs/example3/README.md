@@ -1,10 +1,9 @@
-## 父子组件之间通信
+## 父子组件通信
 
 ### 一、父组件传递数据给子组件
 
-父组件可以通过props属性将数据如何传递给子组件。
+父组件可以通过props属性(通过v-bind指令)将数据如何传递给子组件，代码如下。
 
-父组件：
 ```HTML
 <todo-item :content="item" 
            :index="index" 
@@ -12,7 +11,7 @@
 </todo-item>
 ```
 
-子组件通过props来接收数据:
+子组件通过props来接收数据。
 
 ```JS
 var TodoItem = {
@@ -63,3 +62,5 @@ var app = new Vue({
   ...
 })
 ```
+
+详细代码见[example3](https://github.com/Bian2017/TravelWebsite/blob/master/docs/example3/index.html)

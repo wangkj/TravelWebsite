@@ -32,3 +32,5 @@ var app = new Vue({
   ...
 })
 ```
+
+详细代码见[example2](https://github.com/Bian2017/TravelWebsite/blob/master/docs/example2/index.html)
