@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hello world</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+  </div>
+  <script>
+    // Vue实例生命周期函数并不放在methods中
+    var app = new Vue({                   // 创建Vue实例，接管页面某部分DOM的渲染
+      el: '#app',
+      template: "<div>{{test}}</div>",
+      data: {
+        test: "hello world"
+      },
+      beforeCreate: function () {
+        console.log('beforeCreate', this.$el, this.$data)
+      },
+      created: function () {
+        console.log('created', this.$el, this.$data)
+      },
+      beforeMount: function () {
+        console.log('beforeMount', this.$el, this.$data)
+      },
+      mounted: function () {
+        console.log('mounted', this.$el)
+      },
+      beforeDestroy: function () {
+        console.log('beforeDestroy')
+      },
+      destroyed: function () {
+        console.log('destroyed')
+      },
+      beforeUpdate: function () {
+        console.log('beforeUpdate')
+      },
+      updated: function () {
+        console.log('updated')
+      }
+    })
+
+    setTimeout(function () {
+      app.test = 'hello template'
+    }, 2000)
+
+    // 销毁vue实例
+    setTimeout(function () {
+      app.$destroy()
+    }, 5000)
+  </script>
+</body>
+
+</html>
