@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hello world</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div v-text="test + ' v-text'"></div>
+    <div v-html="test + ' v-html'"></div>
+  </div>
+  <script>
+    // Vue实例生命周期函数并不放在methods中
+    var app = new Vue({                   // 创建Vue实例，接管页面某部分DOM的渲染
+      el: '#app',
+      data: {
+        test: "<span>hello world</span>"
+      }
+    })
+  </script>
+</body>
+
+</html>
