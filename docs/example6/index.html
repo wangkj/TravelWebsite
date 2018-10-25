@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>计算属性，方法，侦听器</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- {{fullName()}} -->
+    {{fullName}}
+    {{age}}
+  </div>
+  <script>
+    var app = new Vue({                   // 创建Vue实例，接管页面某部分DOM的渲染
+      el: '#app',
+      data: {
+        firstName: "Li",
+        lastName: "Lei",
+        fullName: "Li Lei",
+        age: 28
+      },
+      // 侦听器
+      watch: {
+        firstName: function() {
+          console.log("First：计算了一次")
+          this.fullName = this.firstName + " " + this.lastName
+        },
+        lastName: function() {
+          console.log("Last：计算了一次")
+          this.fullName = this.firstName + " " + this.lastName
+        }
+      }
+      // methods: {
+      //   fullName: function() {
+      //     console.log('方法测试：计算了一次')
+      //     return this.firstName + " " + this.lastName
+      //   }
+      // },
+
+      // // 计算属性
+      // computed: {
+      //   fullName: function () {
+      //     console.log('计算属性测试：计算一次')
+      //     return this.firstName + " " + this.lastName
+      //   }
+      // }
+    })
+
+    setInterval(function () { 
+      app.age += 1
+    }, 1000)
+  </script>
+</body>
+
+</html>
