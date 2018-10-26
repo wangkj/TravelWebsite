@@ -54,6 +54,34 @@ vm.list = vm.list.filter(function (item) {
 
 你可能认为这将导致 Vue 丢弃现有 DOM 并重新渲染整个列表。幸运的是，事实并非如此。Vue 为了使得 DOM 元素得到最大范围的重用而实现了一些智能的、启发式的方法，所以用一个含有相同元素的数组去替换原来的数组是非常高效的操作。
 
+#### 2.3 使用set方法
+
+使用 Vue.set(object, key, value) 方法对数组进行修改。例如：
+
+```JS
+var vm = new Vue({
+  data: {
+    list: [
+      1,2,3,4
+    ]
+  }
+})
+```
+
+对数组值进行修改：
+
+```JS
+// 修改第0位的数据值
+Vue.set(vm.list, 0, 10)
+```
+
+你还可以使用 vm.$set 实例方法，它只是全局 Vue.set 的别名：
+
+```JS
+// 针对数组，添加新值
+vm.$set(vm.list, 4, 5)
+```
+
 ### 三、对象更改检测
 
 对象和数组类似，也存在 Vue 不能检测对象属性的添加或删除：
@@ -118,11 +146,11 @@ vm.userProfile = Object.assign({}, vm.userProfile, {
 
 通过返回一个新的引用地址，来实现对象的更改。
 
-
 ### 四、占位符template
 
 可以利用带有 v-for 的 <template> 渲染多个元素。比如：
-```JS
+
+```HTML
 <ul>
   <template v-for="item in items">
     <li>{{ item.msg }}</li>
