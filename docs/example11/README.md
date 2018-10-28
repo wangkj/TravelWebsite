@@ -3,7 +3,7 @@
 
 ### 一、特殊属性is
 
-创建row组件，将其放置在tbody标签里内部，如下所示：
+创建row组件，将其放置在tbody标签里内部，代码如下所示：
 
 ```HTML
 <div id="app">
@@ -26,9 +26,9 @@
 </script>
 ```
 
-效果如下图所示：
+视图效果：
 
-![]()
+![](https://raw.githubusercontent.com/Bian2017/TravelWebsite/master/docs/img/tbody.png)
 
 正常情况下，tr标签应该在tbody里面，而现在跑到了tbody外面。这是因为HTML5规范规定table里面要有tbody，而tbody里面必须得放tr。而上述情况在tbody里面放置了子组件row，这个自定义组件 row 会被作为无效的内容提升到外部，并导致最终渲染结果出错。
 
@@ -59,7 +59,7 @@
 
 ### 二、子组件的data属性
 
-如下一段代码，创建子组件row，发现页面展示的时候出错。
+创建子组件row，代码如下：
 
 ```HTML
 <div id="app">
@@ -85,11 +85,13 @@
 </script>
 ```
 
-![]()
+发现视图展示的时候出错：
+
+![](https://raw.githubusercontent.com/Bian2017/TravelWebsite/master/docs/img/error-component.png)
 
 在定义子组件的时候，data必须是一个函数，而不能是一个对象。之所以这么设计，是因为子组件不像根组件那样只会调用一次，它可能会在不同的地方被调用多次，每次调用的时候我希望子组件的数据应该是一份独立的对象拷贝，避免与其他地方调用产生冲突，所以data必须是一个函数。
 
-**代码修改如下**
+**修改代码：**
 
 ```HTML
 <div id="app">
