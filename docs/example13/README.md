@@ -52,8 +52,8 @@
 
 **非props视图如下：**
 
-![]()
+![](https://raw.githubusercontent.com/Bian2017/TravelWebsite/master/docs/img/non-props.png)
 
 **props视图如下：**
 
-![]()
+![](https://raw.githubusercontent.com/Bian2017/TravelWebsite/master/docs/img/props-content.png)
