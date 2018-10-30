@@ -57,3 +57,18 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
   </keep-alive>
 </transition>
 ```
+
+### 修改meta
+
+禁止缩放
+minimum-scale=1.0,maximum-scale=1.0,user-scalable=no
+
+把不同手机浏览器的初始样式做一个统一，引入reset.css
+
+### 移动端有个1像素边框的问题
+
+手机屏幕分辨率笔记高，1px可能对应两个物理像素高度。所以需要引入1像素解决问题。实现真正的物理1像素。
+
+### 移动端有个300毫秒点击延迟的问题
+
+在移动端，某些机型某些浏览器上，点击click事件会延迟300毫秒然后才执行。可以使用fast-click库。
