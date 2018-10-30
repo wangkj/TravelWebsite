@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>非父子组件间的传值</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <child content="Li Lei"></child>
+    <child content="Han Mei"></child>
+  </div>
+  <script>
+    Vue.prototype.bus = new Vue()
+
+    Vue.component('child', {
+      data: function() {
+        return {
+          selfContent: this.content
+        }
+      },
+      props: {
+        content: String
+      },
+      template: '<div @click="handleItemClick">{{selfContent}}</div>',
+      methods: {
+        handleItemClick: function () {
+          this.bus.$emit('change', this.selfContent)      //因为this.bus是一个Vue实例，而Vue实例有个$emit方法
+        }
+      },
+      mounted: function () {
+        var self = this               
+        this.bus.$on('change', function (msg) {       //因为this.bus是一个Vue实例，而Vue实例有个$on方法
+          self.selfContent = msg                          //因为是回调，所以this作用域发生了变化，需绑定下this
+        })
+      }
+    })
+
+    var app = new Vue({
+      el: '#app',
+    })
+  </script>
+</body>
+
+</html>
