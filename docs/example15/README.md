@@ -1,9 +1,9 @@
 
 ## 非父子组件间的传值
 
-![]()
+![](https://raw.githubusercontent.com/Bian2017/TravelWebsite/master/docs/img/PassValue.png)
 
-如上图所示，要想实现非父子组件的传值，除了使用Vuex外，还可以使用事件中间件实现非父子组件间的传值。
+如上图所示，要想实现非父子组件的传值(第三层级的组件间的传值)，除了使用Vuex外，还可以使用事件中间件实现非父子组件间的传值。
 
 ### 事件中间件
 
