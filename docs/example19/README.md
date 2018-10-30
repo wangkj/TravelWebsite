@@ -49,7 +49,7 @@
 
 当一个元素被transition组件包裹时，Vue会自动地分析元素的CSS样式，然后构建一个动画的流程。
 
-![]()
+![](https://github.com/Bian2017/TravelWebsite/blob/master/docs/img/CSS%20%20animation.png)
 
 如上图所示，Vue在动画即将被执行的一瞬间，会往内部的div上加上两个class名字，分别是fade-enter和fade-enter-active。当动画第一帧执行结束后，Vue在动画运行到第二帧时，此时会干两件事情：
 
@@ -65,6 +65,6 @@
 
 ### 当从显示状态变为隐藏状态
 
-![]()
+![](https://raw.githubusercontent.com/Bian2017/TravelWebsite/master/docs/img/fade-leave.png)
 
 动画原理同上。
