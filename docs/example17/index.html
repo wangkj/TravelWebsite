@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue中的作用域插槽</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <child>
+      <!-- 从子组件接收的数据都放置在props中 -->
+      <template slot-scope="props">
+        <li>{{props.item}}</li>
+      </template>
+    </child>
+  </div>
+  <script>
+    Vue.component('child', {
+      data: function () {
+        return {
+          list: [1, 2, 3, 4]
+        }
+      },
+      template: `<div>
+          <ul>
+            <!-- 将item作为一个插槽的 prop 传入。-->
+            <slot v-for="item of list" :item=item>
+            </slot>
+          </ul>
+        </div>`
+    })
+
+    var app = new Vue({
+      el: '#app',
+    })
+  </script>
+</body>
+
+</html>
