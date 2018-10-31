@@ -72,3 +72,7 @@ minimum-scale=1.0,maximum-scale=1.0,user-scalable=no
 ### 移动端有个300毫秒点击延迟的问题
 
 在移动端，某些机型某些浏览器上，点击click事件会延迟300毫秒然后才执行。可以使用fast-click库。
+
+#rem
+
+此时的rem是相对于reset中的font-size: 50px计算的。由于设计稿给定的是两倍设计稿，此时反而正是设计稿给的尺寸。
