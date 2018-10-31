@@ -76,3 +76,26 @@ minimum-scale=1.0,maximum-scale=1.0,user-scalable=no
 #rem
 
 此时的rem是相对于reset中的font-size: 50px计算的。由于设计稿给定的是两倍设计稿，此时反而正是设计稿给的尺寸。
+
+
+## 三、Vue使用注意点
+
+### 1. 深度作用选择器
+
+使用 scoped 后，父组件的样式将不会渗透到子组件中。但当我们引入第三方组件库时(如使用 vue-awesome-swiper 实现移动端轮播)，需要在局部组件中修改第三方组件库的样式，而又不想去除scoped属性造成组件之间的样式覆盖，这时我们可以通过使用 >>> 操作符穿透scoped：
+
+```CSS
+<style scoped>
+.a >>> .b { /* ... */ }
+</style>
+```
+
+上述代码将会编译成：
+
+```CSS
+.a[data-v-f3f3eg9] .b { /* ... */ }
+```
+
+有些像 Sass 之类的预处理器无法正确解析 >>> 。这种情况下你可以使用 /deep/ 操作符取而代之---这是一个 >>> 的别名，同样可以正常工作。
+
+详细见[链接](https://vue-loader.vuejs.org/zh/guide/scoped-css.html#%E6%B7%B7%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%92%8C%E5%85%A8%E5%B1%80%E6%A0%B7%E5%BC%8F)
