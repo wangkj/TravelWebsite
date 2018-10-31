@@ -58,20 +58,8 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 </transition>
 ```
 
-### 修改meta
 
-禁止缩放
-minimum-scale=1.0,maximum-scale=1.0,user-scalable=no
 
-把不同手机浏览器的初始样式做一个统一，引入reset.css
-
-### 移动端有个1像素边框的问题
-
-手机屏幕分辨率笔记高，1px可能对应两个物理像素高度。所以需要引入1像素解决问题。实现真正的物理1像素。
-
-### 移动端有个300毫秒点击延迟的问题
-
-在移动端，某些机型某些浏览器上，点击click事件会延迟300毫秒然后才执行。可以使用fast-click库。
 
 #rem
 
@@ -98,4 +86,49 @@ minimum-scale=1.0,maximum-scale=1.0,user-scalable=no
 
 有些像 Sass 之类的预处理器无法正确解析 >>> 。这种情况下你可以使用 /deep/ 操作符取而代之---这是一个 >>> 的别名，同样可以正常工作。
 
-详细见[链接](https://vue-loader.vuejs.org/zh/guide/scoped-css.html#%E6%B7%B7%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%92%8C%E5%85%A8%E5%B1%80%E6%A0%B7%E5%BC%8F)
+详细见[链接](https://vue-loader.vuejs.org/zh/guide/scoped-css.html#%E6%B7%B7%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%92%8C%E5%85%A8%E5%B1%80%E6%A0%B7%E5%BC%8F)。
+
+## 四、移动Web开发注意点
+
+### 1. 禁止缩放
+
+html5默认允许用户缩放页面，如果需要禁止缩放，我们需要将user-scalabel=0设置下，具体代码如下：
+
+```HTML
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+```
+
+### 2. 移动端 Retina 屏幕 1px 边框问题
+
+我们知道，像素可以分为物理像素（CSS像素）和设备像素。由于现在手机大部分是Retina高清屏幕，所以在PC端和移动端存在设备像素比的概念。简单说就是你在pc端看到的1px和在移动端看到的1px是不一样的。
+
+在PC端上，像素可以称为CSS像素，PC端上dpr为1。也就说你书写css样式是是多少在pc上就显示多少。而在移动端上，像素通常使用设备像素。往往PC端和移动端上在不做处理的情况下1px显示是不同的。
+
+一个物理像素等于多少个设备像素取决于移动设备的屏幕特性(是否是Retina)和用户缩放比例。
+
+如果是Retina高清屏幕，那么dpr的值可能为2或者3，那么当你在pc端上看到的1px时，在移动端上看到的就会是2px或者3px。
+
+由于业务需求，我们需要一些方法来实现移动端上的1px。
+
+此时可以引入border.css来解决这一问题。
+
+
+### 3. 统一浏览器的默认样式reset.css
+
+把不同手机浏览器的初始样式做一个统一，引入reset.css
+
+### 4. 移动端 300 毫秒点击延迟问题
+
+在移动端，某些机型某些浏览器上，点击click事件会延迟300毫秒然后才执行。可以使用fast-click库。
+
+### 5. 宽高比设置
+
+```CSS
+overflow: hidden
+  width: 100%
+  height: 0
+  padding-bottom: 50%
+```
+
+
+Vue DevTools
