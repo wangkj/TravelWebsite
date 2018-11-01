@@ -135,9 +135,7 @@ Vue DevTools
 
 ## 五、样式优化
 
-### 1. 混合书写(Mixins)
-
-**混入**
+### 1. 混合书写(Mixins) --- 混入
 
 混入和函数定义方法一致，但是应用却大相径庭。
 
@@ -155,7 +153,7 @@ form input[type=button]
   border-radius(5px)
 ```
 
-编译成(属性被扩展并复制到选择器中)：
+编译后结果(属性被扩展并复制到选择器中)：
 
 ```
 form input[type=button] {
@@ -180,3 +178,9 @@ form input[type=button]
 注意到我们混合书写中的border-radius当作了属性，而不是一个递归函数调用。
 
 详见[链接](https://www.zhangxinxu.com/jq/stylus/mixins.php)。
+
+### flex
+
+flex影响宽度，此时可以引入min-width： 0进行解决。
+
+ text-indent: .2rem
