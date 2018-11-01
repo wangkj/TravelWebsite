@@ -195,3 +195,26 @@ http://localhost:8080/static/mock/index.json
 ### webpack-dev-server
 
 vue提供了代理转发机制
+
+## 六、配置优化
+
+### 1. 代理转发
+
+在开发环境下，可通过 webpack-dev-server 将axios请求转发到本地，利用mock来返回数据。代理转发的相关配置文件位于 config/index.js 。
+
+```JS
+module.exports = {
+  dev: {
+    proxyTable: {
+      '/api': {
+        target: 'http://localhost:8080',
+        pathRewrite: {
+          '^/api': '/static/mock'
+        }
+      }
+    },
+  }
+}
+```
+
+如果不想始终传递 /api，则需重写路径。
