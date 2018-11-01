@@ -184,3 +184,14 @@ form input[type=button]
 flex影响宽度，此时可以引入min-width： 0进行解决。
 
  text-indent: .2rem
+
+
+### static目录
+
+这个目录可以被外部访问到
+
+http://localhost:8080/static/mock/index.json
+
+### webpack-dev-server
+
+vue提供了代理转发机制
