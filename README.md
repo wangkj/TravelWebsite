@@ -179,9 +179,9 @@ form input[type=button]
 
 详见[链接](https://www.zhangxinxu.com/jq/stylus/mixins.php)。
 
-### 2. flex布局导致省略符无效问题
+### 2. Flex布局导致省略符无效
 
-一个设置了 flex:1 的容器中，如果文字很长，这时候文字就会超出容器，而不是呆在设置好的动态剩余的空间中。简化描述如下：大致是有一个main容器是flex布局，左边一个logo固定宽高，右边content动态宽度。
+在一个设置了 flex:1 的容器中，如果文字很长，这时候文字就会超出容器，而不是呆在设置好的动态剩余的空间中。举例如下：有main容器是flex布局，里面内容左边是一个logo固定宽高，右边content动态宽度。
 
 ```HTML
 <div class="main">
@@ -216,14 +216,14 @@ form input[type=button]
 }
 ```
 
-.notice可能会非常长，一些设备下需要隐藏显示，即不换行，并留下省略符 ... 作标记。这里会发现 text-overflow: ellipsis 不生效，省略符根本没有出现。而且因为设置了 nowrap 会发现文字会将 content 撑开，导致内容超出了屏幕。
+.notice内容可能会非常长，需要隐藏显示，即不换行，并留下省略符 ... 作标记。这里会发现 text-overflow: ellipsis 不生效，省略符根本没有出现。而且因为设置了 nowrap 会发现文字会将 content 撑开，导致内容超出了屏幕。
 
 ```
 尝试取消父元素.content的flex: 1，无效； 
 尝试取消.main容器的display: flex，省略号出现；
 ```
 
-因此猜测是flex布局的问题，进一步猜测省略符需要对父元素限定宽度。 尝试对父元素.content设置width: 100%无效，但是设置width: 0可行(注：min-width: 0同样可行)。即：
+因此猜测是flex布局的问题，进一步猜测省略符需要对父元素限定宽度。尝试对父元素.content设置width: 100%无效，但是设置width: 0可行(注：min-width: 0同样可行)。即：
 
 ```CSS
 .content {
@@ -232,19 +232,16 @@ form input[type=button]
 }
 ```
 
-如果不设置宽度，.content可以被子节点无限撑开；因此.notice总有足够的宽度在一行内显示所有文本，也就不能触发截断省略的效果。测试还有一种方法可以达到效果：
+如果不设置宽度，.content可以被子节点无限撑开，因此.notice总有足够的宽度在一行内显示所有文本，也就不能触发截断省略的效果。测试还有一种方法可以达到效果(设置overflow: hidden)：
 
 ```CSS
 .content {
   flex: 1;
-  overflow: hidden；
+  overflow: hidden；  
 }
 ```
 
-上面的二种方法都可以达到我们需要的效果，即给 content 设置了 flex 为 1 的时候，它会动态的获得父容器的剩余宽度，且不会被自己的子元素把内容撑开。
-
- text-indent: .2rem
-
+通过上面讲述的两种方法都可以达到我们需要的效果，即给 content 设置了 flex 为 1 的时候，它会动态的获得父容器的剩余宽度，且不会被自己的子元素把内容撑开。
 
 ## 六、vue-cli 配置
 
