@@ -342,3 +342,43 @@ module.exports = {
 任何放在 static/ 中文件需要以绝对路径的形式引用：/static/[filename]。如果更改 assetSubDirectory 的值为 assets，那么路径需改为 /assets/[filename]。
 
 > 注：static目录可以被外部访问到: http://localhost:8080/static/mock/index.json 。
+
+
+## 七、项目优化
+
+### 1. swiper组件默认显示最后一个页面(非第一个页面)
+
+```HTML
+<div class="wrapper">
+  <swiper :options="swiperOption">
+    <swiper-slide v-for="item of list" :key="item.id">
+      <img class="swiper-img" :src="item.imgUrl" />
+    </swiper-slide>
+    <div class="swiper-pagination"  slot="pagination"></div>
+  </swiper>
+</div>
+```
+
+这是因为在创建swiper的时候，是根据props传递的空数组[]创建的，故导致显示所有页面的时候显示最后一个页面。
+
+针对这一问题，可以让swiper初次创建的时候，由完整数据来进行创建。
+
+```HTML
+<swiper :options="swiperOption" v-if="list.length">
+```
+
+但这样写不是特别优雅，因为要尽量避免在模板文件里面出现逻辑性代码，此时可以通过计算属性来实现。
+
+```HTML
+<swiper :options="swiperOption" v-if="showSwiper">
+<script>
+export default {
+  name: 'HomeSwiper',
+  computed: {
+    showSwiper () {
+      return this.list.length
+    }
+  }
+}
+</script>
+```
