@@ -433,22 +433,62 @@ better-scroll 提供了一个类，实例化的第一个参数是一个原生的
 
 详细[链接](https://github.com/ustbhuangyi/better-scroll/blob/master/README_zh-CN.md)。
 
+better-scroll 提供了很多灵活的 API，当我们基于 better-scroll 去实现一些 feature 的时候，会用到这些 API，了解他们会有助于开发更加复杂的需求。
 
+#### scrollToElement(el, time, offsetX, offsetY, easing)
 
++ 参数：
+  + {DOM | String} el 滚动到的目标元素, 如果是字符串，则内部会尝试调用 querySelector 转换成 DOM 对象。
+  + {Number} time 滚动动画执行的时长（单位 ms）
+  + {Number | Boolean} offsetX 相对于目标元素的横轴偏移量，如果设置为 true，则滚到目标元素的中心位置
+  + {Number | Boolean} offsetY 相对于目标元素的纵轴偏移量，如果设置为 true，则滚到目标元素的中心位置
+  + {Object} easing 缓动函数，一般不建议修改，如果想修改，参考源码中的 ease.js 里的写法
++ 返回值：无
++ 作用：滚动到指定的目标元素。
 
-
-通过循环输出的ref，它是一个数组。
-
-```
+```JS
 watch: {
-    letter () {
-      if (this.letter) {
-        const element = this.$refs[this.letter][0]
-        this.scroll.scrollToElement(element)
-      }
+  letter () {
+    if (this.letter) {
+      const element = this.$refs[this.letter][0]
+      this.scroll.scrollToElement(element)
     }
   }
-
+}
 ```
 
-scroll.scrollToElement
+### 2. ref属性
+
+当 v-for 用于元素或组件的时候，ref引用信息将是包含 DOM 节点或组件实例的数组。
+
+```HTML
+<template>
+  <ul class="list">
+    <li class="item"
+      v-for="item of letters"
+      :key="item"
+      :ref="item"
+      @touchmove="handleTouchMove"
+    >
+      ...
+    </li>
+  </ul>
+</template>
+
+<script>
+export default {
+  ...
+  methods: {
+    handleTouchMove (e) {
+      const startY = this.$refs['A'][0].offsetTop       // 有v-for时，refs的引用是数组
+      const touchY = e.touches[0].clientY - 74
+      const index = Math.floor((touchY - startY) / 20)
+      if (index >= 0 && index < this.letters.length) {
+        this.$emit('change', this.letters[index])
+      }
+    },
+  }
+  ...
+}
+</script>
+```
