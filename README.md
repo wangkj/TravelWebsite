@@ -401,3 +401,26 @@ export default {
 }
 </script>
 ```
+
+## 八、待补充
+
+### 1. better-scroll插件
+```HTML
+<div class="wrapper">
+  <ul class="content">
+    <li>...</li>
+    <li>...</li>
+    ...
+  </ul>
+  <!-- 这里可以放一些其它的 DOM，但不会影响滚动 -->
+</div>
+```
+
+上面的代码中 better-scroll 是作用在外层 wrapper 容器上的，滚动的部分是 content 元素。这里要注意的是，better-scroll 只处理容器（wrapper）的第一个子元素（content）的滚动，其它的元素都会被忽略。
+
+最简单的初始化代码如下：
+```JS
+import BScroll from 'better-scroll'
+let wrapper = document.querySelector('.wrapper')
+let scroll = new BScroll(wrapper)
+```
