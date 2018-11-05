@@ -319,7 +319,7 @@ box-sizing 属性可以被用来调整这些表现:
   padding: 0 .1rem
 ```
 
-如上，一个input框设置宽度为100%，此时input框会撑满整个屏幕。当设置padding后，则input框超出了屏幕。此时可以设置box-sizing: border-box来避免上述情况。
+如上，一个input框设置宽度为100%，此时input框会撑满整个屏幕。当设置padding后，则input框超出了屏幕。此时可以设置box-sizing: border-box来避免上述情况发生。
 
 ## 六、vue-cli 配置
 
