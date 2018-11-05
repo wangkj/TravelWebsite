@@ -24,7 +24,7 @@ export default {
   height: $headerHeight
   text-align: center
   color: #fff
-  background: $bglColor
+  background: $bgColor
   position: relative
   .header-back
     position: absolute

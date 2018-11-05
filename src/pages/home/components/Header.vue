@@ -30,7 +30,7 @@ export default {
 .header
   display: flex
   line-height: $headerHeight
-  background: $bglColor
+  background: $bgColor
   color: #fff
   .header-left
     width: .64rem
