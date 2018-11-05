@@ -38,8 +38,8 @@ export default {
     overflow: hidden
     width: 100%
     height: 0
-    padding-bottom: 48%
+    padding-bottom: 31.25%
     background: #eee
-    .swier-img
+    .swiper-img
       width: 100%
 </style>
