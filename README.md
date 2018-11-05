@@ -302,6 +302,25 @@ form input[type=button]
 
 通过上面讲述的两种方法都可以达到我们需要的效果，即给 content 设置了 flex 为 1 的时候，它会动态的获得父容器的剩余宽度，且不会被自己的子元素把内容撑开。
 
+### 3. box-sizing样式
+
+在CSS中，你设置一个元素的 width 与 height 只会应用到这个元素的内容区。如果这个元素有任何的 border 或 padding ，绘制到屏幕上时的盒子宽度和高度会加上设置的边框和内边距值。这意味着当你调整一个元素的宽度和高度时需要时刻注意到这个元素的边框和内边距。当我们实现响应式布局时，这个特点尤其烦人。
+
+box-sizing 属性可以被用来调整这些表现:
+
++ content-box 是默认值。如果你设置一个元素的宽为100px，那么这个元素的内容区会有100px宽，并且任何边框和内边距的宽度都会被增加到最后绘制出来的元素宽度中。
+
++ border-box 告诉浏览器去理解你设置的边框和内边距的值是包含在width内的。也就是说，如果你将一个元素的width设为100px,那么这100px会包含其它的border和padding，内容区的实际宽度会是width减去border + padding的计算值。大多数情况下这使得我们更容易的去设定一个元素的宽高。
+
+```
+.search-input
+  box-sizing: border-box
+  width: 100%
+  padding: 0 .1rem
+```
+
+如上，一个input框设置宽度为100%，此时input框会撑满整个屏幕。当设置padding后，则input框超出了屏幕。此时可以设置box-sizing: border-box来避免上述情况。
+
 ## 六、vue-cli 配置
 
 ### 1. 代理转发
