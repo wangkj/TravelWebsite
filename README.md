@@ -432,3 +432,23 @@ let scroll = new BScroll(wrapper)
 better-scroll 提供了一个类，实例化的第一个参数是一个原生的 DOM 对象。当然，如果传递的是一个字符串，better-scroll 内部会尝试调用 querySelector 去获取这个 DOM 对象。
 
 详细[链接](https://github.com/ustbhuangyi/better-scroll/blob/master/README_zh-CN.md)。
+
+
+
+
+
+通过循环输出的ref，它是一个数组。
+
+```
+watch: {
+    letter () {
+      if (this.letter) {
+        const element = this.$refs[this.letter][0]
+        this.scroll.scrollToElement(element)
+      }
+    }
+  }
+
+```
+
+scroll.scrollToElement
