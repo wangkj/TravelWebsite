@@ -344,9 +344,9 @@ module.exports = {
 > 注：static目录可以被外部访问到: http://localhost:8080/static/mock/index.json 。
 
 
-## 七、项目优化
+## 七、项目优化
 
-### 1. swiper组件默认显示最后一个页面(非第一个页面)
+### 1. 轮播(swiper)组件默认显示最后一个页面(非第一个页面)
 
 ```HTML
 <div class="wrapper">
@@ -359,15 +359,15 @@ module.exports = {
 </div>
 ```
 
-这是因为在创建swiper的时候，是根据props传递的空数组[]创建的，故导致显示所有页面的时候显示最后一个页面。
+这是因为在创建swiper的时候，是根据props传递的初始值(空数组[])创建的，故导致轮播组件在显示所有页面的时候默认显示最后一个页面。
 
-针对这一问题，可以让swiper初次创建的时候，由完整数据来进行创建。
+针对这一问题，可以让swiper初次创建的时候，由完整数据来进行创建。
 
 ```HTML
 <swiper :options="swiperOption" v-if="list.length">
 ```
 
-但这样写不是特别优雅，因为要尽量避免在模板文件里面出现逻辑性代码，此时可以通过计算属性来实现。
+根据list.length长度来决定是否创建swiper，但这样写不是特别优雅，因为要尽量避免在模板文件里面出现逻辑性代码，此时还可以通过计算属性来实现。
 
 ```HTML
 <swiper :options="swiperOption" v-if="showSwiper">
