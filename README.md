@@ -557,6 +557,23 @@ export default {
 
 boder-bottom
 
+### 3. swiper插件
+
+当swiper插件开始时是处于隐藏状态，如果再次将它显示出来的时候，swiper计算宽度会有些问题，导致轮播图无法正常的滚动，此时可以通过observeParents 和 observer 这两个参数来解决。
+
+```JS
+swiperOptions: {
+  pagination: '.swiper-pagination',
+  paginationType: 'fraction',
+  observer: true,
+  observeParents: true
+}
+```
+
+这表示这个swiper插件只要监听到我这个元素或者父级元素发生DOM结构变化，我会自动地自我刷新一次，通过自我刷新方式就能解决计算宽度问题。
+
+
+详见[链接](https://3.swiper.com.cn/)。
 
 ### localStorage
 
