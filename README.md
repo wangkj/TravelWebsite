@@ -437,6 +437,16 @@ export default {
 </script>
 ```
 
+### 2. 减少TouchMove的执行次数
+
+通过函数节流方式，减少TouchMove的执行次数。
+
+详见代码分支[daily/0.0.14](https://github.com/Bian2017/TravelWebsite/commit/e4382e581268d70551822cf190f0dffa9b541f83)。
+
+其次将startY的每次计算放置到updated生命周期中，减少了频繁运算。
+
+详见代码分支[daily/0.0.13](https://github.com/Bian2017/TravelWebsite/commit/abaaf23c12c84464850a501c9f7254cb4bc582ba)
+
 ## 八、第三方插件
 
 ### 1. better-scroll插件
