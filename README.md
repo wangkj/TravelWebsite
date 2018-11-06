@@ -539,3 +539,10 @@ export default {
 ```
 
 boder-bottom
+
+
+### localStorage
+
+localStorage在目前的浏览器环境来说，还不是完全稳定的，可能会出现各种各样的问题，所以在设置localStorage时一定要考虑异常处理。
+
+只要使用localStorage，最好在外层加上一个try {} catche (e) {} 。因为在某些浏览器，如果用户关闭了本地存储这个功能或者使用隐身模式，使用localStorage会导致浏览器抛出异常，整个代码就无法运行。为了避免这一问题，建议在localStorage外层加上try {} catch{} 。
