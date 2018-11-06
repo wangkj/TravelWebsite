@@ -447,6 +447,23 @@ export default {
 
 详见代码分支[daily/0.0.13](https://github.com/Bian2017/TravelWebsite/commit/abaaf23c12c84464850a501c9f7254cb4bc582ba)
 
+### 3. keep-alive优化网页性能
+
+我的路由内容被加载一次之后，就把路由中的内容放置到内存之中，下次再进入这个路由的时候，就无需重新渲染组件，这样就避免了重新执行钩子函数，只需从内存中把之前的内容拿出来显示即可。
+
+此时多了一个生命周期函数activited。
+
+```JS
+activated () {
+  if (this.lastCity !== this.city) {
+    this.lastCity = this.city
+    this.getHomeInfo()
+  }
+}
+```
+
+根据city是否发生变化，来决定是否重新发出请求。
+
 ## 八、第三方插件
 
 ### 1. better-scroll插件
