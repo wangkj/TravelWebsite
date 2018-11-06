@@ -189,6 +189,41 @@ overflow: hidden
   padding-bottom: 50%
 ```
 
+### 5. Touch对象
+
+Touch对象代表一个触点，可以通过event.touches[0]获取，每个触点包含位置，大小，形状，压力大小，和目标 element属性。
+
+```JS
+{
+  screenX: 511, 
+  screenY: 400,//触点相对于屏幕左边沿的Y坐标
+  clientX: 244.37899780273438, 
+  clientY: 189.3820037841797,//相对于可视区域
+  pageX: 244.37, 
+  pageY: 189.37,//相对于HTML文档顶部，当页面有滚动的时候与clientX=Y 不等
+  force: 1,//压力大小，是从0.0(没有压力)到1.0(最大压力)的浮点数
+  identifier: 1036403715,//一次触摸动作的唯一标识符
+  radiusX: 37.565673828125, //能够包围用户和触摸平面的接触面的最小椭圆的水平轴(X轴)半径
+  radiusY: 37.565673828125,
+  rotationAngle: 0,//它是这样一个角度值：由radiusX 和 radiusY 描述的正方向的椭圆，需要通过顺时针旋转这个角度值，才能最精确地覆盖住用户和触摸平面的接触面
+  target: {} // 此次触摸事件的目标element
+}
+```
+
+**如何获取字母表的偏移高度**
+
+```JS
+// offsetTop：获取字符A距离其offsetParent元素的顶部的距离(该距离不包含导航条的高度)。
+const startY = this.$refs['A'][0].offsetTop
+// clientY：返回触点相对于可见视区(visual viewport)上边沿的的Y坐标。
+// touchY: clientY - 导航条的高度
+const touchY = e.touches[0].clientY - 74
+// 获取触底的偏移差值，再除以每个字母的高度
+const index = Math.floor((touchY - startY) / 20)
+if (index >= 0 && index < this.letters.length) {
+  this.$emit('change', this.letters[index])
+}
+```
 
 Vue DevTools
 
