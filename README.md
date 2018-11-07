@@ -702,3 +702,37 @@ deactivated () {
 ```
 
 > 注：deactivted---当页面即将被隐藏或者页面即将被替换成新的页面时，这个组件的deactivated生命周期钩子会被执行。
+
+
+### 递归组件
+
+递归组件：在组件自身调用组件自身。
+
+```Vue
+<template>
+  <div>
+    <div
+      class="item"
+      v-for="(item, index) of list"
+      :key="index"
+    >
+      <div class="item-title border-bottom">
+        <span class="item-title-icon"></span>
+        {{item.title}}
+      </div>
+      <div v-if="item.children">
+        <detail-list :list="item.children"></detail-list>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'DetailList',
+  props: {
+    list: Array
+  }
+}
+</script>
+```
