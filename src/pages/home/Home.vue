@@ -11,7 +11,6 @@
 <script>
 import { mapState } from 'vuex'
 import axios from 'axios'
-import HomeHeader from './components/Header'
 import HomeSwiper from './components/Swiper'
 import HomeIcons from './components/Icons'
 import HomeRecommend from './components/Recommend'
@@ -29,7 +28,7 @@ export default {
     }
   },
   components: {
-    HomeHeader,
+    HomeHeader: () => import('./components/Header'),
     HomeSwiper,
     HomeIcons,
     HomeRecommend,
