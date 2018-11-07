@@ -679,3 +679,26 @@ var top = document.documentElement.scrollTop ? document.documentElement.scrollTo
 ```
 
 在文档使用了DTD时，document.body.scrollTop的值为0，此时需要使用document.documentElement.scrollTop来获取滚动条滚过的长度；在未使用DTD定义文档时，使用document.body.scrollTop获取值。
+
+### 全局事件解绑
+
+当事件绑定的不是组件，而是整个全局的windows对象，这就造成绑定的事件不仅对这个组件有效果，也会对其他组件产生影，如下代码(代码位于src/pages/detail/components/Header.vue)：
+
+```
+activated () {
+  window.addEventListener('scroll', this.handleScroll)
+}
+```
+
+此时，可以在deactivated生命周期里对全局事件进行解绑。
+
+```JS
+activated () {
+  window.addEventListener('scroll', this.handleScroll)
+},
+deactivated () {
+  window.removeEventListener('scroll', this.handleScroll)
+}
+```
+
+> 注：deactivted---当页面即将被隐藏或者页面即将被替换成新的页面时，这个组件的deactivated生命周期钩子会被执行。
