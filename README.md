@@ -822,3 +822,32 @@ scrollBehavior (to, from, savedPosition) {
 ```JS
 import 'babel-polyfill' 
 ```
+
+### 打包上线
+
+> npm run build
+
+如何希望打包生成的文件，放置到某个文件目录project下，此时需配置config/index.js
+
+将assetsPublicPath有原来的'/'，修改成'/project'
+```JS
+build: {
+  // Template for index.html
+  index: path.resolve(__dirname, '../dist/index.html'),
+
+  // Paths
+  assetsRoot: path.resolve(__dirname, '../dist'),
+  assetsSubDirectory: 'static',
+  assetsPublicPath: '/project',
+}
+```
+
+mainifest.js --- webpack打包生成的一个配置文件
+vendor.js --- 各个页面各个组件公用的一些代码
+app.js --- 项目的所有页面的逻辑业务代码
+
+### 异步组件
+
+
+
+
