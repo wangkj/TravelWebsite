@@ -615,3 +615,6 @@ localStorage在目前的浏览器环境来说，还不是完全稳定的，可�
 ```
 
 "/detail/:id"表示动态路由的概念。
+
+
+documentElement
