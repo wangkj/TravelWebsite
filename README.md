@@ -397,6 +397,19 @@ module.exports = {
 
 > 注：static目录可以被外部访问到: http://localhost:8080/static/mock/index.json 。
 
+### 3. webpack-dev-server
+
+如何通过ip访问到本机运行的webpack-dev-server。
+
+可以通过--host 0.0.0.0的方式来进行访问。
+
+```JS
+ "scripts": {
+    "dev": "webpack-dev-server --host 0.0.0.0 --inline --progress --config build/webpack.dev.conf.js",
+  },
+```
+
+此时手机就可以通过ip地址访问同一局域网内运行的项目。
 
 ## 七、项目优化
 
@@ -773,3 +786,39 @@ scrollBehavior (to, from, savedPosition) {
 }
 ```
 
+### 问题2： 真机测试2---拖动字母表时，整个屏幕跟着拖动。
+
+解决：在字母表(Alphabet.vue)中，针对touchstart事件，添加一个prevent。
+
+```HTML
+<template>
+  <ul class="list">
+    <li class="item"
+      v-for="item of letters"
+      :key="item"
+      :ref="item"
+      @touchstart.prevent="handleTouchStart"
+      @touchmove="handleTouchMove"
+      @touchend="handleTouchEnd"
+      @click="handleLetterClick"
+    >
+      {{item}}
+    </li>
+  </ul>
+</template>
+```
+
+针对有些机型，访问网页是白屏效果时，可能是以下两种情况原因：
+
++ 不支持Promise
++ webpack-dev-server自身问题
+
+**Promise**
+
+针对不支持Promise，此时需安装第三方依赖包babel-polyfill，它会判断如何浏览器不支持Promise，它会自动往代码里添加es6新特效。
+
+然后在代码中引入babel-polyfill即可。
+
+```JS
+import 'babel-polyfill' 
+```
