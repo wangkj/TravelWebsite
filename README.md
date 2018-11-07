@@ -868,4 +868,5 @@ components: {
 3）了解Vuex---针对复杂项目，创建Vuex
 4）了解Vue的服务端渲染
 5）了解Vue生态资源---了解常用插件
-6）最后研究Vue的源码
+6）最后研究Vue的源码，查看每次代码的commit
+7）了解webpack、babel
