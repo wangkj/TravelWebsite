@@ -464,6 +464,20 @@ activated () {
 
 根据city是否发生变化，来决定是否重新发出请求。
 
+#### exclude
+
+如果有些页面不想做缓存，还可以通过exclude选项来进行设置。
+
+```HTML
+<template>
+  <div id="app">
+    <keep-alive exclude="Detail">
+      <router-view />
+    </keep-alive>
+  </div>
+</template>
+```
+
 ## 八、第三方插件
 
 ### 1. better-scroll插件
@@ -736,3 +750,26 @@ export default {
 }
 </script>
 ```
+
+
+### 每个组件name作用
+
+目前所知有三个用途：
+
++ 做递归组件，会用到它；
++ 当我们想对页面上的某个组件取消缓存的时候，可以使用name
++ 当使用开发者调试工具的时候(Vue DevTools)，此时展示的是各个组件名字；
+
+
+### 问题1
+
+当首页拖动滚动底部，此时点击热销推荐的最后一个，当跳转到详情页时，发现页面展示为空白。往上翻，会发现页面在上面。也就是说，拖动会多个页面互相影响。
+
+针对这一问题，vue-router官网有个[滚动行为](https://router.vuejs.org/zh/guide/advanced/scroll-behavior.html)，这里面详细地讲解了这一问题的解决方案。
+
+```JS
+scrollBehavior (to, from, savedPosition) {
+  return { x: 0, y: 0 }
+}
+```
+
