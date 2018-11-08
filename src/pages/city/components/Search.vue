@@ -72,7 +72,7 @@ export default {
     ...mapMutations(['changeCity'])
   },
   mounted () {
-    this.scroll = new BScroll(this.$refs.search)
+    this.scroll = new BScroll(this.$refs.search, { click: true })
   }
 }
 </script>

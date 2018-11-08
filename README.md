@@ -546,6 +546,13 @@ watch: {
 }
 ```
 
+#### click
+
+类型：Boolean
+默认值：false
+作用：better-scroll 默认会阻止浏览器的原生 click 事件。当设置为 true，better-scroll 会派发一个 click 事件，我们会给派发的 event 参数加一个私有属性 _constructed，值为 true
+
+
 ### 2. ref属性
 
 当 v-for 用于元素或组件的时候，ref引用信息将是包含 DOM 节点或组件实例的数组。
