@@ -491,66 +491,6 @@ activated () {
 </template>
 ```
 
-## 八、第三方插件
-
-### 1. better-scroll插件
-
-better-scroll 是一款重点解决移动端（现已支持 PC 端）各种滚动场景需求的插件。相比原生scroll，better-scroll可以轻松hook各种自定义的事件(onBeforeScrollStart, onScrollStart, onScroll, onScrollEnd, flick)。
-
-```HTML
-<div class="wrapper">
-  <ul class="content">
-    <li>...</li>
-    <li>...</li>
-    ...
-  </ul>
-  <!-- 这里可以放一些其它的 DOM，但不会影响滚动 -->
-</div>
-```
-
-上面的代码中 better-scroll 是作用在外层 wrapper 容器上的，滚动的部分是 content 元素。这里要注意的是，**better-scroll 只处理容器（wrapper）的第一个子元素（content）的滚动，其它的元素都会被忽略**。
-
-最简单的初始化代码如下：
-
-```JS
-import BScroll from 'better-scroll'
-let wrapper = document.querySelector('.wrapper')
-let scroll = new BScroll(wrapper)
-```
-
-better-scroll 提供了一个类，实例化的第一个参数是一个原生的 DOM 对象。当然，如果传递的是一个字符串，better-scroll 内部会尝试调用 querySelector 去获取这个 DOM 对象。
-
-详细[链接](https://github.com/ustbhuangyi/better-scroll/blob/master/README_zh-CN.md)。
-
-better-scroll 提供了很多灵活的 API，当我们基于 better-scroll 去实现一些 feature 的时候，会用到这些 API，了解他们会有助于开发更加复杂的需求。
-
-#### scrollToElement(el, time, offsetX, offsetY, easing)
-
-+ 参数：
-  + {DOM | String} el 滚动到的目标元素, 如果是字符串，则内部会尝试调用 querySelector 转换成 DOM 对象。
-  + {Number} time 滚动动画执行的时长（单位 ms）
-  + {Number | Boolean} offsetX 相对于目标元素的横轴偏移量，如果设置为 true，则滚到目标元素的中心位置
-  + {Number | Boolean} offsetY 相对于目标元素的纵轴偏移量，如果设置为 true，则滚到目标元素的中心位置
-  + {Object} easing 缓动函数，一般不建议修改，如果想修改，参考源码中的 ease.js 里的写法
-+ 返回值：无
-+ 作用：滚动到指定的目标元素。
-
-```JS
-watch: {
-  letter () {
-    if (this.letter) {
-      const element = this.$refs[this.letter][0]
-      this.scroll.scrollToElement(element)
-    }
-  }
-}
-```
-
-#### click
-
-类型：Boolean
-默认值：false
-作用：better-scroll 默认会阻止浏览器的原生 click 事件。当设置为 true，better-scroll 会派发一个 click 事件，我们会给派发的 event 参数加一个私有属性 _constructed，值为 true
 
 
 ### 2. ref属性
@@ -591,23 +531,6 @@ export default {
 
 boder-bottom
 
-### 3. swiper插件
-
-当swiper插件开始时是处于隐藏状态，如果再次将它显示出来的时候，swiper计算宽度会有些问题，导致轮播图无法正常的滚动，此时可以通过observeParents 和 observer 这两个参数来解决。
-
-```JS
-swiperOptions: {
-  pagination: '.swiper-pagination',
-  paginationType: 'fraction',
-  observer: true,
-  observeParents: true
-}
-```
-
-这表示这个swiper插件只要监听到我这个元素或者父级元素发生DOM结构变化，我会自动地自我刷新一次，通过自我刷新方式就能解决计算宽度问题。
-
-
-详见[链接](https://3.swiper.com.cn/)。
 
 ### localStorage
 
