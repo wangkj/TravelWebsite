@@ -356,99 +356,10 @@ box-sizing 属性可以被用来调整这些表现:
 
 如上，一个input框设置宽度为100%，此时input框会撑满整个屏幕。当设置padding后，则input框超出了屏幕。此时可以设置box-sizing: border-box来避免上述情况发生。
 
-## 六、vue-cli 配置
 
-### 1. 代理转发
-
-在开发环境下，可通过 webpack-dev-server 将axios请求转发到本地，利用mock来返回数据。代理转发的相关配置文件位于 config/index.js 。
-
-```JS
-module.exports = {
-  dev: {
-    proxyTable: {
-      '/api': {
-        target: 'http://localhost:8080',
-        pathRewrite: {
-          '^/api': '/static/mock'
-        }
-      }
-    },
-  }
-}
-```
-
-如果不想始终传递 /api，则需重写路径。
-
-### 2. assets目录和static目录区别
-
-**Webpacked Assets**
-
-为了回答这个问题，我们首先需要了解Webpack如何处理静态资产。在 *.vue 组件中，所有模板和CSS都会被 vue-html-loader 及 css-loader 解析，并查找资源URL。例如，在 \<img src="./logo.png"> 和 background: url(./logo.png) 中，"./logo.png" 是相对的资源路径，将由 **Webpack 解析为模块依赖**。
-
-因为 logo.png 不是 JavaScript，当被视为模块依赖时，需要使用 url-loader 和 file-loader 处理它。vue-cli 的 webpack 脚手架已经配置了这些 loader，因此可以使用相对/模块路径。
-
-由于这些资源可能在构建过程中被内联/复制/重命名，所以它们基本上是源代码的一部分。这就是为什么建议将 Webpack 处理的静态资源放在 /src 目录中和其它源文件放一起的原因。事实上，甚至不必把它们全部放在 /src/assets：可以用模块/组件的组织方式来使用它们。例如，可以在每个放置组件的目录中存放静态资源。
-
-**"Real" Static Assets**
-
-相比之下，static/ 目录下的文件并不会被 Webpack 处理：它们会直接被复制到最终目录（默认是dist/static）下。必须使用**绝对路径**引用这些文件，这是通过在 config.js 文件中的 build.assetsPublicPath 和 build.assetsSubDirectory 连接来确定的。
-
-任何放在 static/ 中文件需要以绝对路径的形式引用：/static/[filename]。如果更改 assetSubDirectory 的值为 assets，那么路径需改为 /assets/[filename]。
-
-> 注：static目录可以被外部访问到: http://localhost:8080/static/mock/index.json 。
-
-### 3. webpack-dev-server
-
-如何通过ip访问到本机运行的webpack-dev-server。
-
-可以通过--host 0.0.0.0的方式来进行访问。
-
-```JS
- "scripts": {
-    "dev": "webpack-dev-server --host 0.0.0.0 --inline --progress --config build/webpack.dev.conf.js",
-  },
-```
-
-此时手机就可以通过ip地址访问同一局域网内运行的项目。
 
 ## 七、项目优化
 
-### 1. 轮播(swiper)组件默认显示最后一个页面(非第一个页面)
-
-```HTML
-<div class="wrapper">
-  <swiper :options="swiperOption">
-    <swiper-slide v-for="item of list" :key="item.id">
-      <img class="swiper-img" :src="item.imgUrl" />
-    </swiper-slide>
-    <div class="swiper-pagination"  slot="pagination"></div>
-  </swiper>
-</div>
-```
-
-这是因为在创建swiper的时候，是根据props传递的初始值(空数组[])创建的，故导致轮播组件在显示所有页面的时候默认显示最后一个页面。
-
-针对这一问题，可以让swiper初次创建的时候，由完整数据来进行创建。
-
-```HTML
-<swiper :options="swiperOption" v-if="list.length">
-```
-
-根据list.length长度来决定是否创建swiper，但这样写不是特别优雅，因为要尽量避免在模板文件里面出现逻辑性代码，此时还可以通过计算属性来实现。
-
-```HTML
-<swiper :options="swiperOption" v-if="showSwiper">
-<script>
-export default {
-  name: 'HomeSwiper',
-  computed: {
-    showSwiper () {
-      return this.list.length
-    }
-  }
-}
-</script>
-```
 
 ### 2. 减少TouchMove的执行次数
 
